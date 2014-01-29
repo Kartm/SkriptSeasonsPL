@@ -1,4 +1,6 @@
 SkriptSeasons
 =============
 
-Seasons script for Skript.
+Skrypt na pory roku. Wymagany plugin Skript.
+
+Autorzy: Arachiozaur, PatisonPlayGames
