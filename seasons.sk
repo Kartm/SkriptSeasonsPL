@@ -1,43 +1,55 @@
-every 1 minecraft day:
+on skript start:
+	{firstloaded} is false:
+		set {firstloaded} to true
+		set {poryroku.dni} to 0
+		set {poryroku.miesiace} to 0
+every minecraft day:
 	add 1 to {poryroku.dni}
 	if {poryroku.dni} is 30:
 		add 1 to {poryroku.miesiace}
 		set {poryroku.dni} to 0
-	if {poryroku.miesiace} is 1:
+	if {poryroku.miesiace} is 0:
 		set {poryroku.zima} to false
 		set {poryroku.jesien} to false
 		set {poryroku.lato} to false
 		set {poryroku.wiosna} to true
-	if {poryroku.miesiace} is 2:
+	if {poryroku.miesiace} is 1:
 		set {poryroku.zima} to false
 		set {poryroku.jesien} to false
 		set {poryroku.lato} to true
 		set {poryroku.wiosna} to false
-	if {poryroku.miesiace} is 3:
+	if {poryroku.miesiace} is 2:
 		set {poryroku.zima} to false
 		set {poryroku.jesien} to true
 		set {poryroku.lato} to false
 		set {poryroku.wiosna} to false
-	if {poryroku.miesiace} is 4:
+	if {poryroku.miesiace} is 3:
 		set {poryroku.miesiace} to 0
 		broadcast "Nowy rok!"
 		set {poryroku.zima} to true
 		set {poryroku.jesien} to false
 		set {poryroku.lato} to false
 		set {poryroku.wiosna} to false
+every second:
+	if {poryroku.miesiace} is not set:
+		set {poryroku.miesiace} to 0
+	if {poryroku.wiosna} is true:
+		set {poraroku} to "Wiosna"
+		set {miesiac} to "Wiosna"
+	if {poryroku.lato} is true:
+		set {poraroku} to "Lato"
+		set {miesiac} to "Lato"
+	if {poryroku.jesien} is true:
+		set {poraroku} to "Jesien"
+		set {miesiac} to "Jesien"
+	if {poryroku.zima} is true:
+		set {poraroku} to "Zima"
+		set {miesiac} to "Zima"
 command /poraroku [<text>]:
 	trigger:
 		if argument 1 is not set:
-			if {poryroku.wiosna} is true:
-				set {_poraroku} to "Wiosna"
-			if {poryroku.lato} is true:
-				set {_poraroku} to "Lato"
-			if {poryroku.jesien} is true:
-				set {_poraroku} to "Jesien"
-			if {poryroku.zima} is true:
-				set {_poraroku} to "Zima"
 			send "<grey>---------------------------------"
-			send "&6Miesiac: %{poryroku.miesiace}%"
+			send "&6Dzien: %{poryroku.dni}% Pora roku: %{poraroku}%"
 			send "<grey>---------------------------------"
 		if argument 1 is "reset":
 			set {poryroku.zima} to false
